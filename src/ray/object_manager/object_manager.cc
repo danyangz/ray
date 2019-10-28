@@ -400,8 +400,10 @@ void ObjectManager::Push(const ObjectID &object_id, const ClientID &client_id) {
     for (uint64_t chunk_index = 0; chunk_index < num_chunks; ++chunk_index) {
       rpc_service_.post([this, push_id, object_id, client_id, data_size, metadata_size,
                          chunk_index, rpc_client]() {
+        RAY_LOG(WARNING) << "start sending obj " << object_id << " chunk " << chunk_index << "with data size " << data_size << " at time " << absl::GetCurrentTimeNanos() / 1000000; 
         auto st = SendObjectChunk(push_id, object_id, client_id, data_size, metadata_size,
                                   chunk_index, rpc_client);
+        RAY_LOG(WARNING) << "after sending obj " << object_id << " chunk " << chunk_index << "with data size " << data_size << " at time " << absl::GetCurrentTimeNanos() / 1000000; 
         if (!st.ok()) {
           RAY_LOG(WARNING) << "Send object " << object_id << " chunk failed due to "
                            << st.message() << ", chunk index " << chunk_index;
