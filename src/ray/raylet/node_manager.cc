@@ -847,7 +847,7 @@ void NodeManager::ProcessClientMessage(
     const uint8_t *message_data) {
   auto registered_worker = worker_pool_.GetRegisteredWorker(client);
   auto message_type_value = static_cast<protocol::MessageType>(message_type);
-  RAY_LOG(DEBUG) << "[Worker] Message "
+  RAY_LOG(WARNING) << "[Worker] Message "
                  << protocol::EnumNameMessageType(message_type_value) << "("
                  << message_type << ") from worker with PID "
                  << (registered_worker ? std::to_string(registered_worker->Pid())
