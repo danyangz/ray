@@ -110,7 +110,7 @@ ray::Status ObjectManager::SubscribeObjDeleted(
 }
 
 ray::Status ObjectManager::Pull(const ObjectID &object_id) {
-  RAY_LOG(DEBUG) << "Pull on " << client_id_ << " of object " << object_id;
+  RAY_LOG(WARNING) << "Pull on " << client_id_ << " of object " << object_id;
   // Check if object is already local.
   if (local_objects_.count(object_id) != 0) {
     RAY_LOG(ERROR) << object_id << " attempted to pull an object that's already local.";
