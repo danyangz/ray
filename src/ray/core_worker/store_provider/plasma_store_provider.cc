@@ -86,6 +86,8 @@ Status CoreWorkerPlasmaStoreProvider::FetchAndGetFromPlasmaStore(
     int64_t timeout_ms, bool fetch_only, const TaskID &task_id,
     std::unordered_map<ObjectID, std::shared_ptr<RayObject>> *results,
     bool *got_exception) {
+  RAY_LOG(WARNING) << "fetch and get";
+
   RAY_RETURN_NOT_OK(raylet_client_->FetchOrReconstruct(batch_ids, fetch_only, task_id));
 
   std::vector<plasma::ObjectID> plasma_batch_ids;
