@@ -1191,6 +1191,7 @@ void NodeManager::ProcessFetchOrReconstructMessage(
       // dependencies to the task dependency manager.
       if (!task_dependency_manager_.CheckObjectLocal(object_id)) {
         // Fetch the object if it's not already local.
+        RAY_LOG(WARNING) << "fetching object " << object_id << " in node manager";
         RAY_CHECK_OK(object_manager_.Pull(object_id));
       }
     } else {
