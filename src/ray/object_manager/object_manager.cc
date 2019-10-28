@@ -326,7 +326,7 @@ void ObjectManager::HandleReceiveFinished(const ObjectID &object_id,
 }
 
 void ObjectManager::Push(const ObjectID &object_id, const ClientID &client_id) {
-  RAY_LOG(DEBUG) << "Push on " << client_id_ << " to " << client_id << " of object "
+  RAY_LOG(WARNING) << "Push on " << client_id_ << " to " << client_id << " of object "
                  << object_id;
   if (local_objects_.count(object_id) == 0) {
     // Avoid setting duplicated timer for the same object and client pair.
@@ -719,7 +719,7 @@ void ObjectManager::HandlePullRequest(const rpc::PullRequest &request,
                                       rpc::SendReplyCallback send_reply_callback) {
   ObjectID object_id = ObjectID::FromBinary(request.object_id());
   ClientID client_id = ClientID::FromBinary(request.client_id());
-  RAY_LOG(DEBUG) << "Received pull request from client " << client_id << " for object ["
+  RAY_LOG(WARNING) << "Received pull request from client " << client_id << " for object ["
                  << object_id << "].";
 
   rpc::ProfileTableData::ProfileEvent profile_event;
